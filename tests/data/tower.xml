@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:cim="https://cim.ucaiug.io/ns#" xmlns:md="http://iec.ch/TC57/61970-552/ModelDescription/1#" xmlns:entsoe="http://entsoe.eu/Secretariat/ProfileExtension/2#" xmlns:neplan="http://www.neplan.ch#">
+<cim:Tower rdf:ID="asdfasdf-ssss-dddd-asdf-aaaabbbcc1">
+    <cim:Structure.height>53</cim:Structure.height>
+    <cim:IdentifiedObject.name>The one that is correct</cim:IdentifiedObject.name>
+</cim:Tower>
+<cim:Tower rdf:ID="asdfasdf-ssss-dddd-asdf-aaaabbbcc2">
+    <cim:Structure.height>530</cim:Structure.height>
+    <cim:IdentifiedObject.name>The one that is too high</cim:IdentifiedObject.name>
+</cim:Tower>
+</rdf:RDF>
