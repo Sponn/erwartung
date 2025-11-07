@@ -2,19 +2,17 @@
 title: Home
 ---
 # `erwartung` - just what you expect from your energy system data
-`erwartung` (pronounced *ɛɐ̯ˈvartʊŋ*, German: expectation) is a collection of data unit tests for the energy domain. It includes software to export these data unit tests to different formats, ready to be used in your data hub.
-
+`erwartung` (pronounced *ɛɐ̯ˈvartʊŋ*, German for “expectation”) is a collection of data unit tests for the energy domain. It includes software that exports these tests to various formats, ready to be used in your data hub.
 
 ## Why is this needed?
-Electricity Grid Operators maintain a large amount of data that describes their built assets, such as power lines, transformer stations, or electricity consumers and producers. Especially with the concept of a “Digital Twin” of the grid, the amount of data has been rapidly increasing in recent years. To ensure high data quality, extensive testing is required. Examples include:
+Electricity grid operators maintain large volumes of data that describe their assets, such as power lines, transformer stations, and electricity consumers and producers. With the rise of “Digital Twin” concepts, the amount of data has been growing rapidly in recent years. To ensure high data quality, extensive testing is required. Typical concerns include:
 
-* data types need to be correct,
-* numerical values need to be within reasonable boundaries (minimum and maximum values),
-* strings need to conform to regular‑expression patterns,
-* quantities of the same assets need to be in reasonable ratios,
-* coordinates need to match addresses,
-* and many more.
-
+- Correct data types  
+- Numerical values that fall within reasonable boundaries (minimum and maximum values)  
+- Strings that conform to regular‑expression patterns  
+- Quantities of similar assets that are in reasonable ratios  
+- Coordinates that match physical addresses  
+- And many more…
 
 ``` mermaid
 flowchart LR
@@ -23,18 +21,17 @@ flowchart LR
   end
   subgraph Exporters
   id2("SQL Queries")
-  id3("Graph based data: SHACL") 
+  id3("Graph‑based data: SHACL") 
   id4("Soon: .yml ")
   id5("...")
   end
   subgraph Integrations
   id2.1("Relational databases")
-  id2.2("csv Files with duckDB 🦆")
+  id2.2("CSV files with DuckDB 🦆")
   id3.1(".xml and .rdf files")
-  id4.1("Data Pipelining tools: Airflow or dbt")
+  id4.1("Data‑pipelining tools: Airflow or dbt")
   id5.1("...")
   end
-  
 
   id1 --> id2
   id1 --> id3
@@ -49,8 +46,7 @@ flowchart LR
   click id1 "unit-tests"
   click id2 "exporters/sql"
   click id3 "exporters/shacl"
-  
 ```
 
-## Role of linkml
-The python tool [linkml](https://linkml.io){target="_blank" rel="noopener noreferrer"} will be used as the basic open source software providing the export functionalities from a Knowledge Base (schema file) to different formats. If needed, the functionality from linkml will be extended.
+## Role of LinkML
+The Python tool [linkml](https://linkml.io){target="_blank" rel="noopener noreferrer"} serves as the core open‑source library that provides export functionality from a knowledge base (schema file) to various formats. Its capabilities can be extended if additional features are required.
