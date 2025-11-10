@@ -5,7 +5,7 @@ title: Home
 `erwartung` (pronounced *ɛɐ̯ˈvartʊŋ*, German for “expectation”) is a collection of data unit tests for the energy domain. It includes software that exports these tests to various formats, ready to be used in your data hub.
 
 ## Why is this needed?
-Electricity grid operators maintain large volumes of data that describe their assets, such as power lines, transformer stations, and electricity consumers and producers. With the rise of “Digital Twin” concepts, the amount of data has been growing rapidly in recent years. To ensure high data quality, extensive testing is required. Typical concerns include:
+Electricity grid operators maintain large volumes of data that describe their assets, such as power lines, transformer stations, and electricity consumers and producers. With the rise of “Digital Twin” concepts, the amount of data has been growing rapidly in recent years. To ensure high data quality, data testing is required. Typical concerns include:
 
 - Correct data types  
 - Numerical values that fall within reasonable boundaries (minimum and maximum values)  
