@@ -18,7 +18,7 @@ In the energy domain, data unit tests can be used to catch common modelling erro
 These tests help maintain data quality, reduce downstream errors, and provide early feedback to data producers.
 
 ## Categories of data tests
-## Required attributes
+### Required attributes
 Attributes can be defined as `required`, meaning that tests fail for entities that do not have these attributes:
 ```yaml
  Tower:
@@ -28,7 +28,7 @@ Attributes can be defined as `required`, meaning that tests fail for entities th
         required: true
 ```
 
-## Range of attributes
+### Range of attributes
 The range of attributes can be defined. Ranges can either be `types` like `decimal` or `string`, or they can be other classes, or types:
 ```yaml
 Structure:
@@ -38,7 +38,7 @@ Structure:
 ```
 LinkML provides more information on [ranges](https://linkml.io/linkml/schemas/slots.html#ranges){target="_blank" rel="noopener noreferrer"}.
 
-## Number values - Upper and lower boundaries
+### Number values - Upper and lower boundaries
 For attributes with a range `decimal` or `integer`, upper and lower boundaries can be set using `maximum_value` and `minimum_value`:
 ```yaml
  Tower:
@@ -48,7 +48,7 @@ For attributes with a range `decimal` or `integer`, upper and lower boundaries c
         maximum_value: 200
         minimum_value: 0
 ```
-## String values - Regular Expressions
+### String values - Regular Expressions
 [Regular expressions](https://en.wikipedia.org/wiki/Regular_expression){target="_blank" rel="noopener noreferrer"} can be used to test string values. They are defined as `pattern`:
 ```yaml
  IdentifiedObject:
@@ -58,7 +58,7 @@ For attributes with a range `decimal` or `integer`, upper and lower boundaries c
         pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
 ```
 
-## Rule based testing
+### Rule based testing
 All of the above tests can be defined **conditionally**, meaning that they only trigger if some condition is satisfied. In this example, the maximum height check is only triggered if the material is of type `wood`:
 
 ```yaml
@@ -75,3 +75,5 @@ Tower:
             height:
               maximum_value: 40
 ```
+### And More
+The tests described above are all part of the core functionality of linkml. We plan to add more testing capabilities either to the core package of linkml, or by writing own software that extends the schemas from linkml.
