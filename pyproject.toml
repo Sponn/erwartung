@@ -1,0 +1,9 @@
+[project]
+name = "erwartung"
+version = "0.1.0"
+description = "erwartung is a collection of data unit tests for the energy domain. It includes software that exports these tests to various formats, ready to be used in your data hub."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "linkml>=1.9.5",
+]
