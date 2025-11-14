@@ -16,20 +16,21 @@ Electricity grid operators maintain large volumes of data that describe their as
 
 
 
+## Getting Started
 
-
-With `erwartung` we do the following: First we formulates generic data tests in a .yml file:
+In `erwartung` there are two steps: First, generic data tests are collected in a `.yml` file.
 
 ```yaml
 
 WindGeneratingUnit:
     attributes:
-        power: 20e6
+        power: 
+            maximum_value: 20e6
 ```
+This is the formulation of one test case, that states that `WindGeneratingUnit` can only have a maximum power of 20 MW. `erwartung` will collect and maintain hundreds of such test cases. In [Data Unit Tests](unit-tests.md) the structure and data model of these tests are described in more detail.
 
 
-
-Then, we build software to export these generic tests to the formats that you need in your data platform:
+In the second step, software tools are used export these generic tests to the formats that you need in your data platform, for example `SQL` or `SHACL`:
 
 === "SQL"
 
@@ -177,42 +178,5 @@ Then, we build software to export these generic tests to the formats that you ne
     WindGeneratingUnit.model_rebuild()
     ```
 
-
-Some intermetdiate text
-
-``` mermaid
-flowchart LR
-  subgraph Data Unit Tests
-  id1@{ shape: docs, label: "📚 Knowledge base of data unit tests" } 
-  end
-  subgraph Exporters
-  id2("SQL Queries")
-  id3("Graph‑based data: SHACL") 
-  id4("Soon: .yml ")
-  id5("...")
-  end
-  subgraph Integrations
-  id2.1("Relational databases")
-  id2.2("CSV files with DuckDB 🦆")
-  id3.1(".xml and .rdf files")
-  id4.1("Data‑pipelining tools: Airflow or dbt")
-  id5.1("...")
-  end
-
-  id1 --> id2
-  id1 --> id3
-  id1 --> id4
-  id1 --> id5
-  id2 --> id2.1
-  id2 --> id2.2
-  id3 --> id3.1
-  id4 --> id4.1
-  id5 --> id5.1
-
-  click id1 "unit-tests"
-  click id2 "exporters/sql"
-  click id3 "exporters/shacl"
-```
-
 ## Role of LinkML
-The Python tool [LinkML](https://linkml.io) serves as the core open‑source library that provides export functionality from a knowledge base (schema file) to various formats. Its capabilities can be extended if additional features are required.
+`erwartung` does not reinvent the wheel. Instead, the existing python tool [LinkML](https://linkml.io) serves as the core open‑source library that provides export functionality from a knowledge base (schema file) to various formats. Its capabilities can be extended, if additional features are required in the scope of `erwartung`.

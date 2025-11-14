@@ -9,15 +9,21 @@ They ensure that each piece of data conforms to expectations such as required fi
 
 In the energy domain, data unit tests can be used to catch common modelling errors.
 
-??? example
+??? example "Examples of Test cases"
 
     * **PowerTransformer rating** – Verify that a `PowerTransformer` entity has a `BaseVoltage` attribute that falls within a realistic range.
     * **Transmission line length** – Ensure that a transmission line entity’s `length` attribute is a non‑negative decimal.
     * **Meter reading timestamp** – Check that a `MeterReading` time attributes  follows an ISO‑8601 timestamp pattern.
 
+
 These tests help maintain data quality, reduce downstream errors, and provide early feedback to data producers.
 
+## Data Modelling
+To run the data unit tests in your data hub, they both need to be formulated in the same data model. A data test that checks the `power` of `WindGeneratingUnits` will not find errors if your table is named `Turbines` and the attribute is named `installedPower`. In `erwartung`, the tests are defined using the **Common Information Model (CIM)** as the core data model. It is a datamodel already used at many grid operators. To also cover data with other data models, `erwartung` will provide a clear mapping template to map your terms on the Common Information Model terms.
+
 ## Categories of data tests
+In this section, the categories of test cases which can be defined is shown.
+
 ### Required attributes
 Attributes can be defined as `required`, meaning that tests fail for entities that do not have these attributes:
 ```yaml
@@ -36,7 +42,7 @@ Structure:
     height:
       range: decimal
 ```
-LinkML provides more information on [ranges](https://linkml.io/linkml/schemas/slots.html#ranges){target="_blank" rel="noopener noreferrer"}.
+LinkML provides more information on [ranges](https://linkml.io/linkml/schemas/slots.html#ranges).
 
 ### Number values - Upper and lower boundaries
 For attributes with a range `decimal` or `integer`, upper and lower boundaries can be set using `maximum_value` and `minimum_value`:
@@ -49,7 +55,8 @@ For attributes with a range `decimal` or `integer`, upper and lower boundaries c
         minimum_value: 0
 ```
 ### String values - Regular Expressions
-[Regular expressions](https://en.wikipedia.org/wiki/Regular_expression){target="_blank" rel="noopener noreferrer"} can be used to test string values. They are defined as `pattern`:
+
+[Regular expressions](https://en.wikipedia.org/wiki/Regular_expression) can be used to test string values. They are defined as `pattern`:
 ```yaml
  IdentifiedObject:
     class_uri: cim:IdentifiedObject
