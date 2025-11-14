@@ -7,22 +7,25 @@ title: Data Unit Tests
 Data unit tests are automated checks that validate individual data records against the rules defined in a data model or schema.  
 They ensure that each piece of data conforms to expectations such as required fields, value ranges, pattern formats, and conditional logic before the data is used downstream (e.g., in analytics, simulations, or reporting).
 
-In the energy domain, data unit tests can be used to catch common modelling errors.
+In the energy domain, data unit tests can be used to catch common modeling errors.
 
 ??? example "Examples of Test cases"
 
     * **PowerTransformer rating** – Verify that a `PowerTransformer` entity has a `BaseVoltage` attribute that falls within a realistic range.
     * **Transmission line length** – Ensure that a transmission line entity’s `length` attribute is a non‑negative decimal.
-    * **Meter reading timestamp** – Check that a `MeterReading` time attributes  follows an ISO‑8601 timestamp pattern.
+    * **Meter reading timestamp** – Check that a `MeterReading` time attribute follows an ISO‑8601 timestamp pattern.
 
 
 These tests help maintain data quality, reduce downstream errors, and provide early feedback to data producers.
 
 ## Data Modelling
-To run the data unit tests in your data hub, they both need to be formulated in the same data model. A data test that checks the `power` of `WindGeneratingUnits` will not find errors if your table is named `Turbines` and the attribute is named `installedPower`. In `erwartung`, the tests are defined using the **Common Information Model (CIM)** as the core data model. It is a datamodel already used at many grid operators. To also cover data with other data models, `erwartung` will provide a clear mapping template to map your terms on the Common Information Model terms.
+To run the data unit tests in your data hub, both the test and your data need to be expressed using the same data model.  
+A test that validates the `power` attribute of a `WindGeneratingUnit` will not work if your dataset uses a different table name (e.g., `Turbines`) or a different attribute name (e.g., `installedPower`).  
+In `erwartung`, tests are defined using the **Common Information Model (CIM)**, a data model widely adopted by grid operators.  
+To support other data models, `erwartung` provides a mapping template that lets you translate your own terminology to the CIM terms.
 
 ## Categories of data tests
-In this section, the categories of test cases which can be defined is shown.
+In this section, the categories of test cases which can be defined are shown.
 
 ### Required attributes
 Attributes can be defined as `required`, meaning that tests fail for entities that do not have these attributes:
@@ -65,6 +68,7 @@ For attributes with a range `decimal` or `integer`, upper and lower boundaries c
         pattern: "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
 ```
 
+
 ### Rule based testing
 All of the above tests can be defined **conditionally**, meaning that they only trigger if some condition is satisfied. In this example, the maximum height check is only triggered if the material is of type `wood`:
 
@@ -83,4 +87,4 @@ Tower:
               maximum_value: 40
 ```
 ### And More
-The tests described above are all part of the core functionality of LinkML. We plan to add more testing capabilities either to the core package of LinkML, or by writing own software that extends the schemas from LinkML.
+The tests described above are all part of the core functionality of LinkML. We plan to add more testing capabilities either to the core package of LinkML, or by writing our own software that extends the schemas from LinkML.
