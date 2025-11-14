@@ -14,23 +14,20 @@ Electricity grid operators maintain large volumes of data that describe their as
 - Coordinates that match physical addresses  
 - And many more…
 
-
-
 ## Getting Started
 
-In `erwartung` there are two steps: First, generic data tests are collected in a `.yml` file.
+`erwartung`consists of two parts. First, generic data tests are defined in a `.yml` file, for example:
 
 ```yaml
-
 WindGeneratingUnit:
     attributes:
-        power: 
+        power:
             maximum_value: 20e6
 ```
-This is the formulation of one test case, that states that `WindGeneratingUnit` can only have a maximum power of 20 MW. `erwartung` will collect and maintain hundreds of such test cases. In [Data Unit Tests](unit-tests.md) the structure and data model of these tests are described in more detail.
 
+This snippet defines a single test case: a `WindGeneratingUnit` may not have a power greater than **20 MW**. `erwartung` will collect and maintain hundreds of such test cases. The structure and data model of these tests are described in more detail in the [Data Unit Tests](unit-tests.md) page.
 
-In the second step, software tools are used export these generic tests to the formats that you need in your data platform, for example `SQL` or `SHACL`:
+In the second part, software tools are used **to export** these generic tests to the formats you need in your data platform, such as **SQL** or **SHACL**:
 
 === "SQL"
 
@@ -180,4 +177,4 @@ In the second step, software tools are used export these generic tests to the fo
 Check out all possible exporters within the [integrations](integrations/index.md).
 
 ## Role of LinkML
-`erwartung` does not reinvent the wheel. Instead, the existing python tool [LinkML](https://linkml.io) serves as the core open‑source library that provides export functionality from a knowledge base (schema file) to various formats. Its capabilities can be extended, if additional features are required in the scope of `erwartung`.
+`erwartung` does not reinvent the wheel. Instead, the existing Python tool [LinkML](https://linkml.io) serves as the core open‑source library that provides export functionality from a knowledge base (schema file) to various formats. Its capabilities can be extended, if additional features are required in the scope of `erwartung`.
