@@ -14,6 +14,15 @@ Electricity grid operators maintain large volumes of data that describe their as
 - Coordinates that match physical addresses  
 - And many more…
 
+Grid operators differ from many other industries because their primary asset, the electricity grid, is a natural monopoly. As a result, they do not compete with other grid operators. This leads to one major advantage:
+
+!!! info "Essence"
+
+    Data tests for grid operators can be developed and maintained as open-source resources, benefiting all operators.
+
+
+
+
 ## Getting Started
 
 `erwartung`consists of two parts. First, generic data tests are defined in a `.yml` file, for example:
