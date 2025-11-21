@@ -29,9 +29,13 @@ Grid operators differ from many other industries because their primary asset, th
 
 ```yaml
 WindGeneratingUnit:
+    class_uri: cim:WindGeneratingUnit
     attributes:
         power:
+            slot_uri: cim:GeneratingUnit.ratedGrossMaxP
             maximum_value: 20e6
+            unit:
+                ucum_code: W
 ```
 
 This snippet defines a single test case: a `WindGeneratingUnit` may not have a power greater than **20 MW**. `erwartung` will collect and maintain hundreds of such test cases. The structure and data model of these tests are described in more detail in the [Data Unit Tests](unit-tests.md) page.
