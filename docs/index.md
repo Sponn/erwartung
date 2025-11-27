@@ -31,7 +31,7 @@ Grid operators differ from many other industries because their primary asset, th
 WindGeneratingUnit:
     class_uri: cim:WindGeneratingUnit
     attributes:
-        power:
+        ratedGrossMaxP:
             slot_uri: cim:GeneratingUnit.ratedGrossMaxP
             maximum_value: 20e6
             unit:
