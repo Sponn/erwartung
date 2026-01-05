@@ -212,5 +212,3 @@ trace.json
 
 # own
 *.backup
-# ignore the generated test docs for now
-docs/validations/* 
