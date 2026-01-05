@@ -311,6 +311,7 @@ def update_zensical_toml(classes_by_subclass: Dict[str, List[str]]):
 
     # Build the new validations structure
     validations_lines = []
+    validations_lines.append('        "unit-tests.md"')
 
     for subclass in sorted(classes_by_subclass.keys()):
         class_files = sorted(classes_by_subclass[subclass])
@@ -319,7 +320,7 @@ def update_zensical_toml(classes_by_subclass: Dict[str, List[str]]):
 
     # Create the new validations entry
     new_validations = ',\n'.join(validations_lines)
-    new_validations_section = f'    {{"Validations" = [\n{new_validations}\n    ]}},\n'
+    new_validations_section = f'    {{"Data Unit Tests" = [\n{new_validations}\n    ]}},\n'
 
     # Find and replace content between comment markers
     output_lines = []
