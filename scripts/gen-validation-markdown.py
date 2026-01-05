@@ -63,6 +63,40 @@ def has_validations(class_data: Dict[str, Any]) -> bool:
     return False
 
 
+def get_attribute_description(attr_name: str, class_data: Dict[str, Any],
+                              schema: Dict[str, Any]) -> str:
+    """
+    Get the description for an attribute, searching the class hierarchy.
+
+    Searches in the following order:
+    1. Current class's attributes section
+    2. Parent class's attributes section (recursively)
+
+    Args:
+        attr_name: Name of the attribute
+        class_data: The class definition
+        schema: The full schema containing all classes
+
+    Returns:
+        The attribute description, or empty string if not found
+    """
+    # First, check the current class's attributes
+    if 'attributes' in class_data:
+        if attr_name in class_data['attributes']:
+            attr_data = class_data['attributes'][attr_name]
+            if isinstance(attr_data, dict) and 'description' in attr_data:
+                return attr_data['description'].strip()
+
+    # If not found and class has a parent, check the parent recursively
+    if 'is_a' in class_data:
+        parent_name = class_data['is_a']
+        if 'classes' in schema and parent_name in schema['classes']:
+            parent_class = schema['classes'][parent_name]
+            return get_attribute_description(attr_name, parent_class, schema)
+
+    return ""
+
+
 def extract_validations(class_data: Dict[str, Any]) -> Dict[str, Dict[str, Any]]:
     """
     Extract all validations for a class, organized by attribute.
@@ -120,9 +154,16 @@ def format_validation_value(value: Any) -> str:
 
 
 def generate_validation_markdown(class_name: str, class_data: Dict[str, Any],
-                                 validations: Dict[str, Dict[str, Any]]) -> str:
+                                 validations: Dict[str, Dict[str, Any]],
+                                 schema: Dict[str, Any]) -> str:
     """
     Generate markdown content for a class with validations.
+
+    Args:
+        class_name: Name of the class
+        class_data: The class definition
+        validations: Extracted validations for the class
+        schema: The full schema (needed to look up inherited descriptions)
     """
     lines = []
 
@@ -159,6 +200,12 @@ def generate_validation_markdown(class_name: str, class_data: Dict[str, Any],
             attr_validations = validations[attr_name]
             lines.append(f"### {attr_name}")
             lines.append("")
+
+            # Add attribute description if available
+            description = get_attribute_description(attr_name, class_data, schema)
+            if description:
+                lines.append(description)
+                lines.append("")
 
             for prop, value in sorted(attr_validations.items()):
                 # Skip non-validation properties and 'required'
@@ -240,8 +287,8 @@ def main():
             # Extract validations
             validations = extract_validations(class_data)
 
-            # Generate markdown
-            markdown = generate_validation_markdown(class_name, class_data, validations)
+            # Generate markdown (pass schema for inherited descriptions)
+            markdown = generate_validation_markdown(class_name, class_data, validations, schema)
 
             # Write to file
             output_file = DOCS_DIR / f"{class_name}.md"
