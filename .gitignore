@@ -209,3 +209,6 @@ __marimo__/
 # Zensical
 trace.json
 .aider*
+
+# own
+*.backup
