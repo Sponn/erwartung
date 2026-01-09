@@ -16,6 +16,7 @@ from utils import load_linkml_schema
 from rdflib import Graph, Namespace
 from ruamel.yaml import YAML
 from ruamel.yaml.comments import CommentedMap
+from ruamel.yaml.scalarstring import DoubleQuotedScalarString
 
 # Constants
 SCRIPT_DIR = Path(__file__).parent
@@ -274,7 +275,7 @@ def merge_constraints(
         added_min = False
         added_max = False
 
-        if constraint.min_value is not None and 'minimum_value' not in property_usage:
+        if constraint.min_value is not None:
             property_usage['minimum_value'] = constraint.min_value
             added_min = True
 
@@ -286,7 +287,7 @@ def merge_constraints(
                 )
                 stats['exclusive_comments'] += 1
 
-        if constraint.max_value is not None and 'maximum_value' not in property_usage:
+        if constraint.max_value is not None:
             property_usage['maximum_value'] = constraint.max_value
             added_max = True
 
@@ -299,12 +300,11 @@ def merge_constraints(
                 stats['exclusive_comments'] += 1
 
         # Add source information if constraints were added
-        if (added_min or added_max) and 'source' not in property_usage:
+        if (added_min or added_max) and 'description' not in property_usage:
             # Format source files as a comma-separated list
-            source_files = sorted(constraint.source_files)
-            source_ref = f"ENTSOE Application Profiles Library v1.1.0 ({', '.join(source_files)})"
-            property_usage['source'] = source_ref
-
+            description_files = sorted(constraint.source_files)
+            description_ref = f"ENTSOE Application Profiles Library v1.1.0 ({', '.join(description_files)})"
+            property_usage['description'] = DoubleQuotedScalarString(description_ref)
         # Track statistics
         if added_min or added_max:
             stats['constraints_added'] += 1
